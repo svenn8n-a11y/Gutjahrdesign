@@ -6,25 +6,25 @@ const services = [
         id: 'weddings',
         title: 'Hochzeiten & Events',
         description: 'Vom Brautstrauß bis zur kompletten Rauminszenierung – wir machen Ihre Träume sichtbar.',
-        image: 'images/04_Hochzeiten/IMG_1027.PNG'
+        image: 'images/Leistungen/hochzeiten.png'
     },
     {
         id: 'b2b',
         title: 'Hotellerie & Gastronomie',
         description: 'Saisonale Dekorationen im Abo-Modell, die Ihre Gäste begeistern.',
-        image: 'images/03_Gartenhaus/1.jpeg'
+        image: 'images/Leistungen/hotellerie.png'
     },
     {
         id: 'signature',
         title: 'Signature Design',
         description: 'Exklusive Konzepte für Privatvillen und Residenzen.',
-        image: 'images/04_Hochzeiten/IMG_1033.PNG'
+        image: 'images/Leistungen/signature.png'
     },
     {
         id: 'studio',
         title: 'Studio & Rental',
         description: 'Unser Showroom als Location für Ihre Content-Produktionen.',
-        image: 'images/03_Gartenhaus/studio_detail.jpeg'
+        image: 'images/Leistungen/studio.png'
     }
 ];
 

@@ -42,16 +42,18 @@ const VideoHero = () => {
         <div className="overlay" />
       </div>
 
-      <div className="hero-content container">
+      <div className="hero-content">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="hero-quote-wrapper"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.5, delay: 9 }}
         >
-          <h1 className="hero-title">
-            Zeitlose Eleganz <br />
-            <span className="italic">für unvergessliche Momente</span>
-          </h1>
+          <blockquote className="hero-quote">
+            <span className="quote-mark">„</span><span className="quote-text">Denn wie<br />
+              vortrefflich<br />
+              schön ist es!</span><span className="quote-mark">"</span>
+          </blockquote>
         </motion.div>
       </div>
 
@@ -100,25 +102,40 @@ const VideoHero = () => {
         }
 
         .hero-content {
-          text-align: center;
+          position: absolute;
+          right: 0;
+          bottom: 15%;
           z-index: 1;
-          color: var(--color-text-dark);
+          padding-right: 5vw;
         }
 
-        .hero-title {
+        .hero-quote-wrapper {
+          text-align: right;
+        }
+
+        .hero-quote {
           font-family: var(--font-heading);
-          font-size: 3.5rem;
-          font-size: clamp(2.5rem, 5vw, 4.5rem);
-          margin-bottom: 1.5rem;
-          line-height: 1.1;
+          color: rgba(255, 253, 245, 0.9);
+          text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+          position: relative;
+          display: inline-block;
         }
 
-        .hero-title .italic {
-          font-style: italic;
+        .quote-text {
+          font-size: clamp(2rem, 4vw, 3.5rem);
           font-weight: 300;
+          font-style: italic;
+          line-height: 1.2;
           display: block;
-          font-size: 0.8em;
-          margin-top: 0.5rem;
+          letter-spacing: 0.02em;
+        }
+
+        .quote-mark {
+          font-family: var(--font-heading);
+          font-size: 1.2em;
+          font-weight: 300;
+          font-style: italic;
+          opacity: 0.8;
         }
       `}</style>
     </section>

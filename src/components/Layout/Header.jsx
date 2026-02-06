@@ -49,7 +49,7 @@ const Header = () => {
           left: 0;
           width: 100%;
           z-index: 1000;
-          padding: 1.5rem 0;
+          padding: 0.8rem 0;
           transition: transform 1.5s ease-out, opacity 1.5s ease-out, background-color 0.5s ease;
           color: var(--color-white);
           transform: translateY(-20px);
@@ -91,7 +91,7 @@ const Header = () => {
 
         .logo {
           font-family: var(--font-heading);
-          font-size: 1.5rem;
+          font-size: 1.1rem;
           font-weight: 600;
           letter-spacing: 0.05em;
           text-transform: uppercase;
@@ -99,12 +99,12 @@ const Header = () => {
 
         .nav-desktop ul {
           display: flex;
-          gap: 2rem;
+          gap: 1.5rem;
           align-items: center;
         }
 
         .nav-desktop a {
-          font-size: 0.9rem;
+          font-size: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           font-weight: 400;
@@ -112,7 +112,7 @@ const Header = () => {
 
         .btn-contact {
           border: 1px solid rgba(255, 255, 255, 0.5);
-          padding: 0.5rem 1.5rem;
+          padding: 0.4rem 1.2rem;
           border-radius: 2px;
           color: #ffffff;
         }
