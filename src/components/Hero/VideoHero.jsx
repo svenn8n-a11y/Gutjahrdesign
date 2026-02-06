@@ -1,19 +1,44 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const VideoHero = () => {
+  const [showLoopVideo, setShowLoopVideo] = useState(false);
+  const introVideoRef = useRef(null);
+  const loopVideoRef = useRef(null);
+
+  const handleIntroEnded = () => {
+    setShowLoopVideo(true);
+    if (loopVideoRef.current) {
+      loopVideoRef.current.play();
+    }
+  };
+
   return (
     <section className="hero-section">
       <div className="video-background">
+        {/* Intro Video - plays once */}
         <video
-          className="hero-video"
+          ref={introVideoRef}
+          className={`hero-video ${showLoopVideo ? 'hidden' : ''}`}
           autoPlay
+          muted
+          playsInline
+          onEnded={handleIntroEnded}
+        >
+          <source src={`${import.meta.env.BASE_URL}videos/Logoanimation_header.mp4`} type="video/mp4" />
+        </video>
+
+        {/* Loop Video - plays after intro */}
+        <video
+          ref={loopVideoRef}
+          className={`hero-video ${showLoopVideo ? '' : 'hidden'}`}
           muted
           loop
           playsInline
-          poster={`${import.meta.env.BASE_URL}images/01_hero/Hintergrundbild_weiss.png`}
         >
-          <source src={`${import.meta.env.BASE_URL}videos/Opener.mp4`} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}videos/Hintergrundvideo.mp4`} type="video/mp4" />
         </video>
+
         <div className="overlay" />
       </div>
 
@@ -27,8 +52,6 @@ const VideoHero = () => {
             Zeitlose Eleganz <br />
             <span className="italic">für unvergessliche Momente</span>
           </h1>
-
-
         </motion.div>
       </div>
 
@@ -53,9 +76,18 @@ const VideoHero = () => {
         }
 
         .hero-video {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: opacity 0.5s ease;
+        }
+
+        .hero-video.hidden {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .overlay {
@@ -65,7 +97,6 @@ const VideoHero = () => {
           width: 100%;
           height: 100%;
           background: rgba(0, 0, 0, 0.1);
-          /* Removed blur for clearer video */
         }
 
         .hero-content {
@@ -76,7 +107,7 @@ const VideoHero = () => {
 
         .hero-title {
           font-family: var(--font-heading);
-          font-size: 3.5rem; /* Fallback */
+          font-size: 3.5rem;
           font-size: clamp(2.5rem, 5vw, 4.5rem);
           margin-bottom: 1.5rem;
           line-height: 1.1;
@@ -89,8 +120,6 @@ const VideoHero = () => {
           font-size: 0.8em;
           margin-top: 0.5rem;
         }
-
-
       `}</style>
     </section>
   );
