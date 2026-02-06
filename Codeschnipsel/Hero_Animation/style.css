@@ -1,0 +1,306 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    font-family: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+}
+
+/* Hero Container - Full viewport */
+.hero-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    z-index: 100;
+}
+
+/* Perspective wrapper for 3D effect */
+.perspective-wrapper {
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Text wrapper containing all letters */
+.text-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    animation: zoomThrough 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* Position adjusted so "J" is slightly off-center to create fly-through effect */
+    transform-origin: 47% 50%; /* Adjusted to center on "J" */
+}
+
+/* Individual letter styling */
+.letter {
+    font-size: 15vw;
+    font-weight: 300;
+    color: #0a0a0a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    transform-style: preserve-3d;
+}
+
+/* Special styling for the "J" - the letter we fly through */
+.letter-j {
+    position: relative;
+}
+
+/* Main zoom-through animation */
+@keyframes zoomThrough {
+    0% {
+        transform: translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateZ(200px) scale(1.5);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translateZ(800px) scale(4);
+        opacity: 1;
+    }
+
+    85% {
+        transform: translateZ(2000px) scale(12);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateZ(5000px) scale(50);
+        opacity: 0;
+    }
+}
+
+/* Alternative: More dramatic acceleration */
+@keyframes zoomThroughDramatic {
+    0% {
+        transform: translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translateZ(100px) scale(1.2);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateZ(400px) scale(2.5);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateZ(1500px) scale(8);
+        opacity: 0.9;
+    }
+
+    95% {
+        transform: translateZ(4000px) scale(30);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateZ(8000px) scale(80);
+        opacity: 0;
+    }
+}
+
+/* Fade out the hero container after animation */
+.hero-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Content that appears after animation */
+.content {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+}
+
+.content.visible {
+    opacity: 1;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* ============================================
+   VARIATION 1: With letter mask effect
+   Creates the illusion of flying "through" the J
+   ============================================ */
+
+.hero-container.mask-effect .letter-j::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: expandMask 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    z-index: 10;
+}
+
+@keyframes expandMask {
+    0%, 60% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    80% {
+        width: 200vw;
+        height: 200vh;
+        opacity: 1;
+    }
+
+    100% {
+        width: 400vw;
+        height: 400vh;
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   VARIATION 2: With blur effect during zoom
+   ============================================ */
+
+.hero-container.blur-effect .text-wrapper {
+    animation: zoomThroughBlur 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes zoomThroughBlur {
+    0% {
+        transform: translateZ(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    50% {
+        transform: translateZ(400px) scale(2);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    80% {
+        transform: translateZ(2000px) scale(10);
+        opacity: 0.9;
+        filter: blur(2px);
+    }
+
+    100% {
+        transform: translateZ(5000px) scale(50);
+        opacity: 0;
+        filter: blur(8px);
+    }
+}
+
+/* ============================================
+   VARIATION 3: Individual letter stagger
+   ============================================ */
+
+.hero-container.stagger-effect .letter {
+    animation: letterZoom 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-container.stagger-effect .letter:nth-child(1) { animation-delay: 0s; }
+.hero-container.stagger-effect .letter:nth-child(2) { animation-delay: 0.03s; }
+.hero-container.stagger-effect .letter:nth-child(3) { animation-delay: 0.06s; }
+.hero-container.stagger-effect .letter:nth-child(4) { animation-delay: 0.09s; } /* J */
+.hero-container.stagger-effect .letter:nth-child(5) { animation-delay: 0.06s; }
+.hero-container.stagger-effect .letter:nth-child(6) { animation-delay: 0.03s; }
+.hero-container.stagger-effect .letter:nth-child(7) { animation-delay: 0s; }
+
+@keyframes letterZoom {
+    0% {
+        transform: translateZ(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateZ(3000px);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   Responsive adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+    .letter {
+        font-size: 12vw;
+    }
+
+    .content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .letter {
+        font-size: 10vw;
+    }
+}
+
+/* ============================================
+   Optional: Replay button for testing
+   ============================================ */
+
+.replay-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: #ffffff;
+    color: #0a0a0a;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+}
+
+.replay-btn:hover {
+    transform: scale(1.05);
+}
