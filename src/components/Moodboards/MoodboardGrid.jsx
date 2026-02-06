@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const moods = [
-    { id: 1, title: 'Elegant & Blush', color: '#F4E4E4', image: '/images/04_Hochzeiten/IMG_1005.jpg' },
-    { id: 2, title: 'All White', color: '#FFFFFF', image: '/images/04_Hochzeiten/IMG_1006.jpg' },
-    { id: 3, title: 'Classic Gold', color: '#FCECE6', image: '/images/04_Hochzeiten/IMG_1008.jpg' },
-    { id: 4, title: 'Blue Romance', color: '#E3EBF4', image: '/images/04_Hochzeiten/IMG_1010.jpg' },
-    { id: 5, title: 'Summer Pastels', color: '#F9F7F2', image: '/images/04_Hochzeiten/IMG_1012.jpg' },
-    { id: 6, title: 'Winter Wedding', color: '#F0F0F0', image: '/images/04_Hochzeiten/IMG_1015.jpg' },
+    { id: 1, title: 'Elegant & Blush', color: '#F4E4E4', image: 'images/04_Hochzeiten/IMG_1005.jpg' },
+    { id: 2, title: 'All White', color: '#FFFFFF', image: 'images/04_Hochzeiten/IMG_1006.jpg' },
+    { id: 3, title: 'Classic Gold', color: '#FCECE6', image: 'images/04_Hochzeiten/IMG_1008.jpg' },
+    { id: 4, title: 'Blue Romance', color: '#E3EBF4', image: 'images/04_Hochzeiten/IMG_1010.jpg' },
+    { id: 5, title: 'Summer Pastels', color: '#F9F7F2', image: 'images/04_Hochzeiten/IMG_1012.jpg' },
+    { id: 6, title: 'Winter Wedding', color: '#F0F0F0', image: 'images/04_Hochzeiten/IMG_1015.jpg' },
 ];
 
 const MoodboardGrid = () => {
@@ -34,7 +34,7 @@ const MoodboardGrid = () => {
                                     style={{ backgroundColor: mood.color }}
                                 >
                                     <img
-                                        src={mood.image}
+                                        src={`${import.meta.env.BASE_URL}${mood.image}`}
                                         alt={mood.title}
                                         className="mood-image"
                                         loading="lazy"

@@ -1,201 +1,188 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Opener = ({ onComplete }) => {
-    const [stage, setStage] = useState('text'); // 'text' | 'video'
+    const [isAnimating, setIsAnimating] = useState(false);
 
-    const handleEnter = () => {
-        setStage('transitioning');
+    const startAnimation = () => {
+        setIsAnimating(true);
+
+        // Animation duration 3500ms -> Switch to main app
         setTimeout(() => {
-            setStage('video');
-            // Optional: auto-complete after some time or let user click to enter site
-            // setTimeout(onComplete, 5000); 
-        }, 800);
+            onComplete();
+        }, 3500);
     };
 
     return (
-        <AnimatePresence mode="wait">
-            {stage === 'text' && (
-                <motion.div
-                    className="opener-text-stage"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-                    transition={{ duration: 0.8 }}
-                    key="text-stage"
-                    onClick={handleEnter}
-                >
-                    <div className="center-content">
-                        <h1 className="opener-title">
-                            <span className="font-light">GUT</span>
-                            <span className="font-bold">JAHR</span>
-                        </h1>
-                        <motion.div
-                            className="enter-text"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1, duration: 1 }}
-                        >
-                            ENTER
-                        </motion.div>
+        <div className="opener-wrapper">
+            {/* Hero Container */}
+            <div className="hero-container">
+                <div className="hero-content">
+                    <div className="perspective-wrapper">
+                        <div className={`text-wrapper ${isAnimating ? 'animate' : ''}`}>
+                            <span className="letter">G</span>
+                            <span className="letter">U</span>
+                            <span className="letter">T</span>
+                            <span className="letter letter-j">J</span>
+                            <span className="letter">A</span>
+                            <span className="letter">H</span>
+                            <span className="letter">R</span>
+                        </div>
                     </div>
-                </motion.div>
-            )}
-
-            {stage === 'video' && (
-                <motion.div
-                    className="opener-video-stage"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                    key="video-stage"
-                >
-                    <div className="video-background">
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            className="opener-video"
-                        >
-                            <source src="/videos/Logoanimation2.mp4" type="video/mp4" />
-                        </video>
-                        {/* Gradient overlay to ensure text readability */}
-                        <div className="video-overlay-gradient"></div>
-                    </div>
-
-                    <div className="content-overlay">
-                        <motion.div
-                            className="logo-container"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        >
-                            {/* Using the moved logo */}
-                            <img src="/images/00_General/Logo.jpeg" alt="Gutjahr Logo" className="opener-logo" />
-                        </motion.div>
-
-                        <motion.button
-                            className="enter-site-btn"
-                            onClick={onComplete}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 2 }}
-                        >
-                            ZUR WEBSITE
-                        </motion.button>
-                    </div>
-                </motion.div>
-            )}
+                    <button
+                        className={`entry-btn ${isAnimating ? 'hidden' : ''}`}
+                        onClick={startAnimation}
+                    >
+                        Entry
+                    </button>
+                </div>
+            </div>
 
             <style>{`
-        .opener-text-stage {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          cursor: pointer;
+        /* Reset and base styles from snippet */
+        .opener-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background-color: #ffffff;
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        .opener-title {
-          font-family: var(--font-heading); /* Or a specific sans-serif if preferred like reference */
-          font-size: 5rem;
-          color: #000;
-          letter-spacing: 0.2em;
-          margin: 0;
-          line-height: 1;
-        }
-
-        .font-light { font-weight: 300; }
-        .font-bold { font-weight: 700; }
-
-        .enter-text {
-          margin-top: 2rem;
-          font-size: 0.9rem;
-          letter-spacing: 0.3em;
-          text-align: center;
-          color: #999;
-        }
-
-        .opener-video-stage {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: #000; /* Dark background for video stage */
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .video-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0.6;
-        }
-
-        .video-placeholder-gradient {
-            display: none;
-        }
-
-        .opener-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-overlay-gradient {
+        /* Hero Container - Full viewport */
+        .hero-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4); /* Slight darken for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            z-index: 100;
+            transition: opacity 0.5s ease-out;
         }
 
-        .content-overlay {
-            position: relative;
-            z-index: 10;
+        /* Hero content */
+        .hero-content {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
             gap: 3rem;
         }
 
-        .opener-logo {
-            max-width: 300px;
-            filter: invert(1) brightness(2); /* Make logo white if it's black on transparent/white */
-            mix-blend-mode: screen; /* Helps integrate if not transparent png */
+        /* Perspective wrapper */
+        .perspective-wrapper {
+            perspective: 1000px;
+            perspective-origin: 50% 50%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .enter-site-btn {
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 1rem 2rem;
+        /* Text wrapper */
+        .text-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            transform-origin: 47% 50%;
+            padding: 0 19.1vw;
+            width: 100%;
+        }
+
+        .text-wrapper.animate {
+            animation: zoomThrough 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Letters */
+        .letter {
+            font-size: 8.2vw;
+            font-weight: 300;
+            color: #0a0a0a;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.8rem;
-            background: transparent;
-            transition: all 0.3s;
+            letter-spacing: 0.1em;
+            display: inline-block;
+            transform-style: preserve-3d;
         }
 
-        .enter-site-btn:hover {
-            background: white;
-            color: black;
+        .letter:last-child {
+            letter-spacing: 0;
+        }
+
+        .letter-j {
+            position: relative;
+        }
+
+        /* Animation Keyframes */
+        @keyframes zoomThrough {
+            0% {
+                transform: translateZ(0) scale(1);
+                opacity: 1;
+            }
+            40% {
+                transform: translateZ(200px) scale(1.5);
+                opacity: 1;
+            }
+            70% {
+                transform: translateZ(800px) scale(4);
+                opacity: 1;
+            }
+            85% {
+                transform: translateZ(2000px) scale(12);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateZ(5000px) scale(50);
+                opacity: 0;
+            }
+        }
+
+        /* Entry Button */
+        .entry-btn {
+            background: transparent;
+            border: 1px solid #0a0a0a;
+            color: #0a0a0a;
+            padding: 0.8rem 2.5rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 101; /* Above text */
+        }
+
+        .entry-btn:hover {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .entry-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .text-wrapper { padding: 0 10vw; }
+            .letter { font-size: 10vw; }
+        }
+
+        @media (max-width: 480px) {
+            .text-wrapper { padding: 0 5vw; }
+            .letter { font-size: 12vw; letter-spacing: 0.05em; }
         }
       `}</style>
-        </AnimatePresence>
+        </div>
     );
 };
 

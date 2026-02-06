@@ -3,38 +3,46 @@ import { useState, useEffect } from 'react';
 // Wait, plan said Vanilla CSS. I will stick to classNames.
 
 const Header = () => {
-    const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
 
-    return (
-        <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-            <div className="container header-content">
-                <a href="/" className="logo">
-                    Gutjahr<span className="text-gold">Design</span>
-                </a>
+    // Appear after 8 seconds
+    const timer = setTimeout(() => setVisible(true), 8000);
 
-                <nav className="nav-desktop">
-                    <ul>
-                        <li><a href="#moodboards">Welten</a></li>
-                        <li><a href="#services">Leistungen</a></li>
-                        <li><a href="#about">Über Uns</a></li>
-                        <li><a href="#contact" className="btn-contact">Kontakt</a></li>
-                    </ul>
-                </nav>
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, []);
 
-                <button className="mobile-menu-btn">
-                    Menu
-                </button>
-            </div>
+  return (
+    <header className={`header ${scrolled ? 'scrolled' : ''} ${visible ? 'visible' : ''}`}>
+      <div className="container header-content">
+        <a href="/" className="logo">
+          Gutjahr<span className="text-gold">Design</span>
+        </a>
 
-            <style>{`
+        <nav className="nav-desktop">
+          <ul>
+            <li><a href="#moodboards">Welten</a></li>
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#about">Über Uns</a></li>
+            <li><a href="#contact" className="btn-contact">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <button className="mobile-menu-btn">
+          Menu
+        </button>
+      </div>
+
+      <style>{`
         .header {
           position: fixed;
           top: 0;
@@ -42,16 +50,37 @@ const Header = () => {
           width: 100%;
           z-index: 1000;
           padding: 1.5rem 0;
-          transition: all var(--transition-fast);
+          transition: transform 1.5s ease-out, opacity 1.5s ease-out, background-color 0.5s ease;
           color: var(--color-white);
+          transform: translateY(-20px);
+          opacity: 0;
+          pointer-events: none;
         }
-        
+
+        .header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header.visible .nav-desktop a,
+        .header.visible .logo {
+            color: #ffffff;
+        }
+
         .header.scrolled {
           background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(12px);
           padding: 1rem 0;
-          color: var(--color-text-dark);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .header.scrolled .nav-desktop a,
+        .header.scrolled .logo {
+          color: var(--color-text-dark);
         }
 
         .header-content {
@@ -82,9 +111,15 @@ const Header = () => {
         }
 
         .btn-contact {
-          border: 1px solid currentColor;
+          border: 1px solid rgba(255, 255, 255, 0.5);
           padding: 0.5rem 1.5rem;
           border-radius: 2px;
+          color: #ffffff;
+        }
+
+        .header.scrolled .btn-contact {
+          border-color: var(--color-text-dark);
+          color: var(--color-text-dark);
         }
 
         .mobile-menu-btn {
@@ -96,8 +131,8 @@ const Header = () => {
           .mobile-menu-btn { display: block; }
         }
       `}</style>
-        </header>
-    );
+    </header>
+  );
 };
 
 export default Header;

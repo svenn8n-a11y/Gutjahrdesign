@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GUTJAHR - Hero Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="hero-container">
-        <div class="perspective-wrapper">
-            <div class="text-wrapper">
-                <span class="letter">G</span>
-                <span class="letter">U</span>
-                <span class="letter">T</span>
-                <span class="letter letter-j">J</span>
-                <span class="letter">A</span>
-                <span class="letter">H</span>
-                <span class="letter">R</span>
+        <div class="hero-content">
+            <div class="perspective-wrapper">
+                <div class="text-wrapper">
+                    <span class="letter">G</span>
+                    <span class="letter">U</span>
+                    <span class="letter">T</span>
+                    <span class="letter letter-j">J</span>
+                    <span class="letter">A</span>
+                    <span class="letter">H</span>
+                    <span class="letter">R</span>
+                </div>
             </div>
+            <button class="entry-btn">Entry</button>
         </div>
     </div>
 
-    <!-- Content that appears after animation -->
-    <div class="content">
-        <h1>Willkommen</h1>
-        <p>Die Animation ist abgeschlossen.</p>
+    <!-- Video that plays after animation -->
+    <div class="video-container">
+        <video class="opener-video" muted playsinline>
+            <source src="Opener.mp4" type="video/mp4">
+        </video>
     </div>
 
     <script src="script.js"></script>

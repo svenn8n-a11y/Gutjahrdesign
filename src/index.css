@@ -17,8 +17,10 @@
 
   /* Spacing */
   --spacing-container: 1200px;
-  --spacing-section: 4rem; /* 64px */
-  --spacing-element: 1.5rem; /* 24px */
+  --spacing-section: 4rem;
+  /* 64px */
+  --spacing-element: 1.5rem;
+  /* 24px */
 
   /* Transitions */
   --transition-fast: 0.3s ease;
@@ -38,9 +40,16 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 400;
   color: var(--color-text-dark);

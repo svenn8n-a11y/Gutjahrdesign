@@ -1,108 +1,39 @@
 /**
  * GUTJAHR Hero Animation
  * Zoom-through text effect where the camera flies through the "J"
+ * Animation starts on "Entry" button click, then plays video
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     const heroContainer = document.querySelector('.hero-container');
-    const content = document.querySelector('.content');
+    const videoContainer = document.querySelector('.video-container');
+    const video = document.querySelector('.opener-video');
     const textWrapper = document.querySelector('.text-wrapper');
+    const entryBtn = document.querySelector('.entry-btn');
 
     // Animation duration in milliseconds (should match CSS animation)
     const ANIMATION_DURATION = 3500;
 
-    // After animation completes, fade out hero and show content
-    setTimeout(() => {
-        heroContainer.classList.add('fade-out');
-        content.classList.add('visible');
+    // Start animation on button click
+    entryBtn.addEventListener('click', startAnimation);
 
-        // Enable page scrolling after animation
-        document.body.style.overflow = 'auto';
-    }, ANIMATION_DURATION);
+    function startAnimation() {
+        // Hide the button
+        entryBtn.classList.add('hidden');
 
-    // Optional: Add replay functionality
-    addReplayButton();
+        // Start the zoom animation
+        textWrapper.classList.add('animate');
+
+        // After animation completes, fade out hero and play video
+        setTimeout(() => {
+            heroContainer.classList.add('fade-out');
+            videoContainer.classList.add('visible');
+
+            // Start video playback
+            video.play();
+        }, ANIMATION_DURATION);
+    }
 });
-
-/**
- * Adds a replay button for testing the animation
- */
-function addReplayButton() {
-    const btn = document.createElement('button');
-    btn.className = 'replay-btn';
-    btn.textContent = 'Animation wiederholen';
-    btn.addEventListener('click', replayAnimation);
-    document.body.appendChild(btn);
-}
-
-/**
- * Replays the animation from the beginning
- */
-function replayAnimation() {
-    const heroContainer = document.querySelector('.hero-container');
-    const content = document.querySelector('.content');
-    const textWrapper = document.querySelector('.text-wrapper');
-
-    // Reset states
-    heroContainer.classList.remove('fade-out');
-    content.classList.remove('visible');
-    document.body.style.overflow = 'hidden';
-
-    // Force reflow to restart animation
-    textWrapper.style.animation = 'none';
-    textWrapper.offsetHeight; // Trigger reflow
-    textWrapper.style.animation = '';
-
-    // Hide hero after animation
-    setTimeout(() => {
-        heroContainer.classList.add('fade-out');
-        content.classList.add('visible');
-        document.body.style.overflow = 'auto';
-    }, 3500);
-}
-
-/**
- * Alternative: GSAP-based animation for more control
- * Uncomment and include GSAP library to use
- */
-/*
-function initGSAPAnimation() {
-    // Requires: <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    const tl = gsap.timeline();
-
-    tl.to('.text-wrapper', {
-        scale: 50,
-        z: 5000,
-        opacity: 0,
-        duration: 3.5,
-        ease: 'power2.in',
-        transformOrigin: '47% 50%'
-    })
-    .to('.hero-container', {
-        opacity: 0,
-        duration: 0.5,
-        pointerEvents: 'none'
-    })
-    .to('.content', {
-        opacity: 1,
-        duration: 0.8
-    });
-}
-*/
-
-/**
- * Advanced: WebGL/Three.js version for even more dramatic effect
- * This would create a true 3D fly-through with depth of field
- */
-/*
-function initThreeJSAnimation() {
-    // Would require Three.js setup
-    // - Create 3D text geometry
-    // - Animate camera through the text
-    // - Add post-processing for blur/glow
-}
-*/
 
 /**
  * Utility: Detect if animation is supported
@@ -118,10 +49,12 @@ function supportsAnimation() {
  */
 function fallbackNoAnimation() {
     const heroContainer = document.querySelector('.hero-container');
-    const content = document.querySelector('.content');
+    const videoContainer = document.querySelector('.video-container');
+    const video = document.querySelector('.opener-video');
 
     heroContainer.style.display = 'none';
-    content.style.opacity = '1';
+    videoContainer.style.opacity = '1';
+    video.play();
 }
 
 // Check support and apply fallback if needed

@@ -1,16 +1,73 @@
-# React + Vite
+# GutjahrDesign
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Eine elegante Webseite für Gutjahr Design - Hochzeits- und Event-Design Studio.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Opener Animation**: Elegante "GUTJAHR" Text-Zoom-Animation mit 3D-Perspektive
+- **Video Hero**: Fullscreen Video-Hintergrund nach der Opener-Animation
+- **Responsive Navigation**: Weisses Menu mit transparentem Hintergrund, erscheint nach 8 Sekunden
+- **Moodboards**: Galerie mit 6 verschiedenen Design-Welten
+- **Services**: 4 Service-Kategorien mit Detail-Seiten
+- **Kontakt-Formular**: Integriertes Kontaktformular
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI Framework
+- **Vite 7** - Build Tool
+- **React Router 7** - Routing
+- **Framer Motion** - Animationen
+- **GitHub Pages** - Hosting
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Build & Deploy
+
+```bash
+npm run build
+npm run deploy
+```
+
+## Projektstruktur
+
+```
+src/
+├── components/
+│   ├── Layout/
+│   │   ├── Header.jsx      # Navigation
+│   │   ├── Footer.jsx      # Footer
+│   │   └── Opener.jsx      # Intro-Animation
+│   ├── Hero/
+│   │   └── VideoHero.jsx   # Video-Hintergrund
+│   ├── Moodboards/
+│   ├── Services/
+│   ├── Contact/
+│   └── Info/
+├── pages/
+│   ├── LandingPage.jsx
+│   ├── MoodboardDetail.jsx
+│   └── ServiceDetail.jsx
+└── App.jsx
+```
+
+## Animation Flow
+
+1. **Opener**: "GUTJAHR" + Entry Button erscheint
+2. **Klick Entry**: 3D Zoom-Through Animation (3.5s)
+3. **VideoHero**: Video im Vollbild-Modus
+4. **Nach 8s**: Navigation fährt herunter
+5. **Scrollen**: Voller Zugriff auf alle Sektionen
+
+## Live Demo
+
+[https://svenn8n-a11y.github.io/Gutjahrdesign/](https://svenn8n-a11y.github.io/Gutjahrdesign/)

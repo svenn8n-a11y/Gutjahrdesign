@@ -27,12 +27,22 @@ html, body {
     z-index: 100;
 }
 
+/* Hero content - vertical layout for text + button */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 3rem;
+}
+
 /* Perspective wrapper for 3D effect */
 .perspective-wrapper {
     perspective: 1000px;
     perspective-origin: 50% 50%;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,20 +54,40 @@ html, body {
     justify-content: center;
     align-items: center;
     transform-style: preserve-3d;
-    animation: zoomThrough 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    /* Position adjusted so "J" is slightly off-center to create fly-through effect */
-    transform-origin: 47% 50%; /* Adjusted to center on "J" */
+    /* Animation paused by default - starts on button click */
+    /* Golden ratio: transform origin at 47% centers on "J" (4th of 7 letters) */
+    transform-origin: 47% 50%;
+    /* Ensure proper centering with padding based on golden ratio */
+    padding: 0 19.1vw; /* (100% - 61.8%) / 2 = 19.1% margin each side */
+    width: 100%;
 }
 
-/* Individual letter styling */
+/* Animation triggered by class */
+.text-wrapper.animate {
+    animation: zoomThrough 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Individual letter styling - Golden Ratio proportions */
+/*
+   Golden Ratio (φ) = 1.618
+   Text should occupy 61.8% of viewport (1/φ)
+   7 letters "GUTJAHR" + letter-spacing
+   Font-size calculated: 61.8vw / ~7.5 effective chars ≈ 8.2vw
+*/
 .letter {
-    font-size: 15vw;
+    font-size: 8.2vw;
     font-weight: 300;
     color: #0a0a0a;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     display: inline-block;
     transform-style: preserve-3d;
+    /* Remove default text-indent offset from last letter */
+}
+
+/* Compensate for letter-spacing on last letter to achieve true centering */
+.letter:last-child {
+    letter-spacing: 0;
 }
 
 /* Special styling for the "J" - the letter we fly through */
@@ -133,33 +163,56 @@ html, body {
     transition: opacity 0.5s ease-out;
 }
 
-/* Content that appears after animation */
-.content {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
+/* Video container that appears after animation */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background-color: #ffffff;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.8s ease-in;
 }
 
-.content.visible {
+.video-container.visible {
     opacity: 1;
+    pointer-events: auto;
 }
 
-.content h1 {
-    font-size: 4rem;
+.opener-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Entry Button - minimal, elegant */
+.entry-btn {
+    background: transparent;
+    border: 1px solid #0a0a0a;
+    color: #0a0a0a;
+    padding: 0.8rem 2.5rem;
+    font-family: inherit;
+    font-size: 0.9rem;
     font-weight: 300;
-    margin-bottom: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.content p {
-    font-size: 1.2rem;
-    opacity: 0.7;
+.entry-btn:hover {
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Hide button when animation starts */
+.entry-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
 }
 
 /* ============================================
@@ -264,12 +317,16 @@ html, body {
 }
 
 /* ============================================
-   Responsive adjustments
+   Responsive adjustments (maintaining golden ratio)
    ============================================ */
 
 @media (max-width: 768px) {
+    .text-wrapper {
+        padding: 0 10vw;
+    }
+
     .letter {
-        font-size: 12vw;
+        font-size: 10vw;
     }
 
     .content h1 {
@@ -278,8 +335,13 @@ html, body {
 }
 
 @media (max-width: 480px) {
+    .text-wrapper {
+        padding: 0 5vw;
+    }
+
     .letter {
-        font-size: 10vw;
+        font-size: 12vw;
+        letter-spacing: 0.05em;
     }
 }
 
@@ -292,11 +354,12 @@ html, body {
     bottom: 2rem;
     right: 2rem;
     padding: 1rem 2rem;
-    background: #ffffff;
-    color: #0a0a0a;
+    background: #0a0a0a;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     font-size: 1rem;
+    font-family: inherit;
     z-index: 1000;
     transition: transform 0.2s ease;
 }

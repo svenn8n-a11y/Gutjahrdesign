@@ -6,25 +6,25 @@ const services = [
         id: 'weddings',
         title: 'Hochzeiten & Events',
         description: 'Vom Brautstrauß bis zur kompletten Rauminszenierung – wir machen Ihre Träume sichtbar.',
-        icon: '🌸' // Placeholder icon
+        image: 'images/04_Hochzeiten/IMG_1027.PNG'
     },
     {
         id: 'b2b',
         title: 'Hotellerie & Gastronomie',
         description: 'Saisonale Dekorationen im Abo-Modell, die Ihre Gäste begeistern.',
-        icon: '🏨'
+        image: 'images/03_Gartenhaus/1.jpeg'
     },
     {
         id: 'signature',
         title: 'Signature Design',
         description: 'Exklusive Konzepte für Privatvillen und Residenzen.',
-        icon: '✨'
+        image: 'images/04_Hochzeiten/IMG_1033.PNG'
     },
     {
         id: 'studio',
         title: 'Studio & Rental',
         description: 'Unser Showroom als Location für Ihre Content-Produktionen.',
-        icon: '📸'
+        image: 'images/03_Gartenhaus/studio_detail.jpeg'
     }
 ];
 
@@ -47,7 +47,14 @@ const Services = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                         >
-                            <div className="service-icon">{service.icon}</div>
+                            <div className="service-image-container">
+                                <img
+                                    src={`${import.meta.env.BASE_URL}${service.image}`}
+                                    alt={service.title}
+                                    className="service-image"
+                                    loading="lazy"
+                                />
+                            </div>
                             <h3>{service.title}</h3>
                             <p>{service.description}</p>
                             <Link to={`/service/${service.id}`} className="service-link">Mehr erfahren &rarr;</Link>
@@ -89,10 +96,23 @@ const Services = () => {
           transform: translateY(-5px);
         }
 
-        .service-icon {
-          font-size: 3rem;
+        .service-image-container {
+          width: 100%;
+          height: 250px;
           margin-bottom: 1.5rem;
-          display: block;
+          overflow: hidden;
+          border-radius: 2px;
+        }
+
+        .service-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image {
+          transform: scale(1.05);
         }
 
         .service-card h3 {
