@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const moods = [
-    { id: 1, title: 'Elegant & Blush', color: '#F4E4E4' },
-    { id: 2, title: 'All White', color: '#FFFFFF' },
-    { id: 3, title: 'Classic Gold', color: '#FCECE6' }, // Gold/Peach mix
-    { id: 4, title: 'Blue Romance', color: '#E3EBF4' },
-    { id: 5, title: 'Summer Pastels', color: '#F9F7F2' },
-    { id: 6, title: 'Winter Wedding', color: '#F0F0F0' },
+    { id: 1, title: 'Elegant & Blush', color: '#F4E4E4', image: '/images/04_Hochzeiten/IMG_1005.jpg' },
+    { id: 2, title: 'All White', color: '#FFFFFF', image: '/images/04_Hochzeiten/IMG_1006.jpg' },
+    { id: 3, title: 'Classic Gold', color: '#FCECE6', image: '/images/04_Hochzeiten/IMG_1008.jpg' },
+    { id: 4, title: 'Blue Romance', color: '#E3EBF4', image: '/images/04_Hochzeiten/IMG_1010.jpg' },
+    { id: 5, title: 'Summer Pastels', color: '#F9F7F2', image: '/images/04_Hochzeiten/IMG_1012.jpg' },
+    { id: 6, title: 'Winter Wedding', color: '#F0F0F0', image: '/images/04_Hochzeiten/IMG_1015.jpg' },
 ];
 
 const MoodboardGrid = () => {
@@ -33,7 +33,12 @@ const MoodboardGrid = () => {
                                     className="mood-image-placeholder"
                                     style={{ backgroundColor: mood.color }}
                                 >
-                                    {/* Image will go here */}
+                                    <img
+                                        src={mood.image}
+                                        alt={mood.title}
+                                        className="mood-image"
+                                        loading="lazy"
+                                    />
                                     <span className="mood-overlay-text">View Mood</span>
                                 </div>
                                 <h3>{mood.title}</h3>
@@ -87,6 +92,13 @@ const MoodboardGrid = () => {
           border: 1px solid rgba(0,0,0,0.05); /* Subtle border for white cards */
         }
 
+        .mood-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
         .mood-overlay-text {
           opacity: 0;
           transition: opacity 0.3s ease;
@@ -100,8 +112,8 @@ const MoodboardGrid = () => {
           opacity: 1;
         }
 
-        .mood-card:hover .mood-image-placeholder {
-          /* Could add a scale effect here */
+        .mood-card:hover .mood-image {
+          transform: scale(1.05);
         }
 
         .mood-card h3 {
