@@ -451,7 +451,7 @@ Please change the parent <Route path="${B}"> to <Route path="${B==="/"?"*":`${B}
           color: var(--color-gold);
           font-weight: 600;
         }
-      `})]}),wC=()=>{const[i,a]=E.useState({name:"",email:"",type:"wedding",date:"",message:""}),s=c=>{a({...i,[c.target.name]:c.target.value})},r=c=>{c.preventDefault(),console.log("Form submitted:",i),alert("Vielen Dank für Ihre Anfrage! Wir melden uns in Kürze.")};return x.jsxs("section",{id:"contact",className:"contact-section",children:[x.jsx("div",{className:"container",children:x.jsxs("div",{className:"contact-wrapper",children:[x.jsxs(ge.div,{className:"contact-info",initial:{opacity:0,x:-30},whileInView:{opacity:1,x:0},viewport:{once:!0},children:[x.jsx("h2",{children:"Lassen Sie uns Ihre Vision verwirklichen"}),x.jsx("p",{children:"Erzählen Sie uns von Ihrem geplanten Event. Je mehr Details Sie uns verraten, desto besser können wir uns auf unser erstes Gespräch vorbereiten."}),x.jsxs("div",{className:"info-item",children:[x.jsx("h4",{children:"Kontakt"}),x.jsx("p",{children:"info@gutjahr-design.de"}),x.jsx("p",{children:"+49 123 456789"})]}),x.jsxs("div",{className:"info-item",children:[x.jsx("h4",{children:"Studio"}),x.jsxs("p",{children:["Musterstraße 123",x.jsx("br",{}),"12345 Musterstadt"]}),x.jsx("p",{className:"note",children:"Termine nur nach Vereinbarung."})]})]}),x.jsx(ge.div,{className:"contact-form-container",initial:{opacity:0,x:30},whileInView:{opacity:1,x:0},viewport:{once:!0},children:x.jsxs("form",{onSubmit:r,className:"contact-form",children:[x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"name",children:"Name"}),x.jsx("input",{type:"text",id:"name",name:"name",value:i.name,onChange:s,required:!0,placeholder:"Ihr Name"})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"email",children:"E-Mail"}),x.jsx("input",{type:"email",id:"email",name:"email",value:i.email,onChange:s,required:!0,placeholder:"ihre.email@beispiel.de"})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"type",children:"Art des Events"}),x.jsxs("select",{id:"type",name:"type",value:i.type,onChange:s,children:[x.jsx("option",{value:"wedding",children:"Hochzeit"}),x.jsx("option",{value:"corporate",children:"Firmenevent"}),x.jsx("option",{value:"private",children:"Privatfeier"}),x.jsx("option",{value:"editorial",children:"Fotoshooting / Editorial"}),x.jsx("option",{value:"other",children:"Sonstiges"})]})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"date",children:"Datum (Optional)"}),x.jsx("input",{type:"date",id:"date",name:"date",value:i.date,onChange:s})]}),x.jsxs("div",{className:"form-group full-width",children:[x.jsx("label",{htmlFor:"message",children:"Nachricht / Wünsche"}),x.jsx("textarea",{id:"message",name:"message",value:i.message,onChange:s,rows:"4",required:!0,placeholder:"Erzählen Sie uns mehr über Ihre Pläne..."})]}),x.jsx("button",{type:"submit",className:"submit-btn",children:"Anfrage absenden"})]})})]})}),x.jsx("style",{children:`
+      `})]}),wC=()=>{const[i,a]=E.useState({name:"",email:"",type:"wedding",date:"",message:""}),[s,r]=E.useState(!1),c=g=>{a({...i,[g.target.name]:g.target.value})},d=async g=>(console.log("Sending email to: geeinsam@gmail.com"),console.log(`Subject: Neue Anfrage von ${g.name} (${g.type})`),console.log("Body:",g),new Promise(p=>setTimeout(p,1e3))),f=async g=>{g.preventDefault(),await d(i),r(!0)},m=g=>{switch(g){case"wedding":return"guides/hochzeiten/Leitfaden.pdf";case"corporate":return"guides/b2b/Leitfaden.pdf";case"private":return"guides/signature/Leitfaden.pdf";case"editorial":return"guides/studio/Leitfaden.pdf";default:return"guides/hochzeiten/Leitfaden.pdf"}};return x.jsxs("section",{id:"contact",className:"contact-section",children:[x.jsx("div",{className:"container",children:x.jsxs("div",{className:"contact-wrapper",children:[x.jsxs(ge.div,{className:"contact-info",initial:{opacity:0,x:-30},whileInView:{opacity:1,x:0},viewport:{once:!0},children:[x.jsx("h2",{children:"Lassen Sie uns Ihre Vision verwirklichen"}),x.jsx("p",{children:"Erzählen Sie uns von Ihrem geplanten Event. Je mehr Details Sie uns verraten, desto besser können wir uns auf unser erstes Gespräch vorbereiten."}),x.jsxs("div",{className:"info-item",children:[x.jsx("h4",{children:"Kontakt"}),x.jsx("p",{children:"info@gutjahr-design.de"}),x.jsx("p",{children:"+49 123 456789"})]}),x.jsxs("div",{className:"info-item",children:[x.jsx("h4",{children:"Studio"}),x.jsxs("p",{children:["Musterstraße 123",x.jsx("br",{}),"12345 Musterstadt"]}),x.jsx("p",{className:"note",children:"Termine nur nach Vereinbarung."})]})]}),x.jsx(ge.div,{className:"contact-form-container",initial:{opacity:0,x:30},whileInView:{opacity:1,x:0},viewport:{once:!0},children:s?x.jsxs("div",{className:"success-message",children:[x.jsx("h3",{children:"Vielen Dank für Ihre Anfrage!"}),x.jsx("p",{children:"Zur Überbrückung der Wartezeit haben wir hier unseren Leitfaden ‚Die Kunst der Vorbereitung‘ für Sie als Geschenk hinterlegt."}),x.jsx("a",{href:`/Gutjahrdesign/${m(i.type)}`,download:!0,className:"download-btn",children:"📥 Leitfaden herunterladen"}),x.jsx("button",{className:"reset-btn",onClick:()=>r(!1),children:"Neue Anfrage"})]}):x.jsxs("form",{onSubmit:f,className:"contact-form",children:[x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"name",children:"Name"}),x.jsx("input",{type:"text",id:"name",name:"name",value:i.name,onChange:c,required:!0,placeholder:"Ihr Name"})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"email",children:"E-Mail"}),x.jsx("input",{type:"email",id:"email",name:"email",value:i.email,onChange:c,required:!0,placeholder:"ihre.email@beispiel.de"})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"type",children:"Art des Events"}),x.jsxs("select",{id:"type",name:"type",value:i.type,onChange:c,children:[x.jsx("option",{value:"wedding",children:"Hochzeit"}),x.jsx("option",{value:"corporate",children:"Firmenevent"}),x.jsx("option",{value:"private",children:"Privatfeier"}),x.jsx("option",{value:"editorial",children:"Fotoshooting / Editorial"}),x.jsx("option",{value:"other",children:"Sonstiges"})]})]}),x.jsxs("div",{className:"form-group",children:[x.jsx("label",{htmlFor:"date",children:"Datum (Optional)"}),x.jsx("input",{type:"date",id:"date",name:"date",value:i.date,onChange:c})]}),x.jsxs("div",{className:"form-group full-width",children:[x.jsx("label",{htmlFor:"message",children:"Nachricht / Wünsche"}),x.jsx("textarea",{id:"message",name:"message",value:i.message,onChange:c,rows:"4",required:!0,placeholder:"Erzählen Sie uns mehr über Ihre Pläne..."})]}),x.jsx("button",{type:"submit",className:"submit-btn",children:"Anfrage absenden"})]})})]})}),x.jsx("style",{children:`
         .contact-section {
           padding: var(--spacing-section) 0;
           background-color: var(--color-white);
@@ -504,6 +504,52 @@ Please change the parent <Route path="${B}"> to <Route path="${B==="/"?"*":`${B}
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 1.5rem;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-message h3 {
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-message p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--color-text-dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--color-gold);
+            transform: translateY(-2px);
+        }
+        
+        .reset-btn {
+            display: block;
+            margin: 1rem auto 0;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            color: var(--color-text-muted);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .full-width {
